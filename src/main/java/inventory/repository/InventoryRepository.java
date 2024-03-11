@@ -22,16 +22,13 @@ public class InventoryRepository {
 		//ClassLoader classLoader = InventoryRepository.class.getClassLoader();
 		File file = new File(filename);
 		ObservableList<Part> listP = FXCollections.observableArrayList();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(file));
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line = null;
 			while((line=br.readLine())!=null){
 				Part part=getPartFromString(line);
 				if (part!=null)
 					listP.add(part);
 			}
-			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

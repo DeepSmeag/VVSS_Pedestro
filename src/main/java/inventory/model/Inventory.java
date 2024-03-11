@@ -41,15 +41,12 @@ public class Inventory {
      * @return 
      */
     public Product lookupProduct(String searchItem) {
-        boolean isFound = false;
-        for(Product p: products) {
-            if(p.getName().contains(searchItem) || (p.getProductId()+"").equals(searchItem)) return p;
-            isFound = true;
+        for(Product product: products) {
+           if (product.getName().contains(searchItem) ||
+                   String.valueOf(product.getProductId()).equals(searchItem))
+               return product;
         }
-        if(isFound == false) {
-            Product product = new Product(0, null, 0.0, 0, 0, 0, null);
-            return product;
-        }
+
         return null;
     }
     
