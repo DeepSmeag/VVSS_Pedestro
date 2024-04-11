@@ -47,7 +47,7 @@ public class Inventory {
                return product;
         }
 
-        return null;
+        return new Product(0, null, 0.0, 0, 0, 0, null);
     }
     
     /**

@@ -1,6 +1,9 @@
 package inventory.service;
 
-import inventory.model.*;
+import inventory.model.InhousePart;
+import inventory.model.OutsourcedPart;
+import inventory.model.Part;
+import inventory.model.Product;
 import inventory.repository.InventoryRepository;
 import javafx.collections.ObservableList;
 
@@ -16,6 +19,16 @@ public class InventoryService {
         repo.addPart(inhousePart);
     }
     public void addOutsourcePart(String name, double price, int inStock, int min, int  max, String partDynamicValue){
+
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+
+        if (inStock < 0) {
+            throw new IllegalArgumentException("In Stock cannot be less than 0");
+        }
+
+
         OutsourcedPart outsourcedPart = new OutsourcedPart(repo.getAutoPartId(), name, price, inStock, min, max, partDynamicValue);
         repo.addPart(outsourcedPart);
     }
