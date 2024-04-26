@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class InventoryUnitTest {
+public class InventoryUnitTest {
 
     private Inventory inventory;
 
@@ -21,20 +21,20 @@ class InventoryUnitTest {
     private Part part;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         inventory = new Inventory();
         inventory.addPart(part);
     }
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         inventory.deletePart(inventory.getAllParts().get(inventory.getAllParts().size()-1));
     }
 
     @ParameterizedTest
     @DisplayName("should return product when found")
     @ValueSource(strings = {"Part 1"})
-    void shouldGetProductByName(String searchItem) {
+    public void shouldGetProductByName(String searchItem) {
         Mockito.when(part.getName()).thenReturn("Part 1");
 
         Part result = inventory.lookupPart(searchItem);
@@ -43,7 +43,7 @@ class InventoryUnitTest {
     }
 
     @Test
-    void shouldReturnEmptyProductWhenNotFound() {
+    public void shouldReturnEmptyProductWhenNotFound() {
         Mockito.when(part.getName()).thenReturn("Part 1");
 
         Part result = inventory.lookupPart("abcdef");

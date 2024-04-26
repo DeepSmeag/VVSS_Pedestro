@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class RepoServiceITTest {
+public class RepoServiceITTest {
 
     private InventoryService inventoryService;
 
@@ -20,7 +20,7 @@ class RepoServiceITTest {
     private Part part;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         InventoryRepository repo = new InventoryRepository();
         inventoryService = new InventoryService(repo);
@@ -30,12 +30,12 @@ class RepoServiceITTest {
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         inventoryService.deletePart(inventoryService.getAllParts().get(inventoryService.getAllParts().size()-1));
     }
 
     @Test
-    void shouldFindPart() {
+    public void shouldFindPart() {
         Mockito.when(part.getName()).thenReturn("Part 1");
 
         Part result = inventoryService.lookupPart("Part 1");
@@ -44,7 +44,7 @@ class RepoServiceITTest {
     }
 
     @Test
-    void shouldNullWhenNotFound() {
+    public void shouldNullWhenNotFound() {
         Mockito.when(part.getName()).thenReturn("Part 1");
 
         Part result = inventoryService.lookupPart("abcdef");

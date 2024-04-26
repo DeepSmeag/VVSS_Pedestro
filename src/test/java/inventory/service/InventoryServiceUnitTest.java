@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InventoryServiceUnitTest {
+public class InventoryServiceUnitTest {
 
     private InventoryService inventoryService;
 
@@ -20,13 +20,13 @@ class InventoryServiceUnitTest {
 
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         inventoryService = new InventoryService(repo);
     }
 
     @Test
-    void shouldFindPart() {
+    public void shouldFindPart() {
         Mockito.when(repo.lookupPart("Part 1")).thenReturn(new OutsourcedPart(1, "Part 1", 1.0, 1, 0, 10, "CompanySRL"));
 
         Part result = inventoryService.lookupPart("Part 1");
@@ -41,7 +41,7 @@ class InventoryServiceUnitTest {
 
 
     @Test
-    void shouldNullWhenNotFound() {
+    public void shouldNullWhenNotFound() {
         Mockito.when(repo.lookupPart("Part 1")).thenReturn(null);
 
         Part result = inventoryService.lookupPart("Part 1");

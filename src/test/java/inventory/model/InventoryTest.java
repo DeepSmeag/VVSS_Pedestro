@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class InventoryTest {
+public class InventoryTest {
 
     private Inventory inventory;
 
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         inventory = new Inventory();
         inventory.addProduct(new Product(1, "Product", 10.0, 10, 1, 100, null));
         inventory.addProduct(new Product(2, "Product 2", 10.0, 10, 1, 100, null));
@@ -24,7 +24,7 @@ class InventoryTest {
     @ParameterizedTest
     @DisplayName("should return product when found 2")
     @ValueSource(strings = {"Product 2", "2"})
-    void shouldGetProductByName2(String searchItem) {
+    public void shouldGetProductByName2(String searchItem) {
         Product expectedProduct = new Product(2, "Product 2", 10.0, 10, 1, 100, null);
 //
         Product product = inventory.lookupProduct(searchItem);
@@ -39,7 +39,7 @@ class InventoryTest {
     @ParameterizedTest
     @DisplayName("should return product when found")
     @ValueSource(strings = {"Product", "1"})
-    void shouldGetProductByName(String searchItem) {
+    public void shouldGetProductByName(String searchItem) {
         Product expectedProduct = new Product(1, "Product", 10.0, 10, 1, 100, null);
 //
         Product product = inventory.lookupProduct(searchItem);
@@ -55,7 +55,7 @@ class InventoryTest {
     @ParameterizedTest
     @DisplayName("should return empty product when not found")
     @ValueSource(strings = {"abcdef"})
-    void shouldReturnEmptyProductWhenNotFound(String searchItem) {
+    public void shouldReturnEmptyProductWhenNotFound(String searchItem) {
         Product expectedProduct = new Product(0, null, 0.0, 0, 0, 0, null);
 
         Product product = inventory.lookupProduct(searchItem);
@@ -70,7 +70,7 @@ class InventoryTest {
 
     @Test
     @DisplayName("should return product with id 0")
-    void shouldNotFoundEmptyList(){
+    public void shouldNotFoundEmptyList(){
         Product expectedProduct = new Product(0, null, 0.0, 0, 0, 0, null);
         inventory = new Inventory();
 
@@ -87,7 +87,7 @@ class InventoryTest {
     }
     @Test
     @DisplayName("should throw error NullPointerException")
-    void shouldThrowNullPointerException(){
+    public void shouldThrowNullPointerException(){
 
         assertThrows(NullPointerException.class, () -> {
             inventory.lookupProduct(null);

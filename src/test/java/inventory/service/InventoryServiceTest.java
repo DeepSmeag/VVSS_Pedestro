@@ -17,19 +17,19 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class InventoryServiceTest {
+public class InventoryServiceTest {
 
     private InventoryService inventoryService;
 
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         InventoryRepository repo = new InventoryRepository();
         inventoryService = new InventoryService(repo);
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         Part part = inventoryService.getAllParts().get(inventoryService.getAllParts().size()-1);
         if(part.getName().equals("Part") || part.getName().equals("a"))
             inventoryService.deletePart(part);
@@ -38,7 +38,7 @@ class InventoryServiceTest {
     @DisplayName("should create part for valid inStock")
     @ParameterizedTest
     @ValueSource(ints = {0, 1})
-    void shouldCreateValidPart(int value) {
+    public void shouldCreateValidPart(int value) {
         int initialSize = inventoryService.getAllParts().size();
         String name = "Part";
         double price = 1.0;
@@ -58,7 +58,7 @@ class InventoryServiceTest {
 
     @DisplayName("should throw exception when creating part with negative stock")
     @Test
-    void shouldThrowExceptionWithNegativeStock() {
+    public void shouldThrowExceptionWithNegativeStock() {
         String name = "Part";
         double price = 1.0;
         int inStock = -1;
@@ -72,7 +72,7 @@ class InventoryServiceTest {
     @DisplayName("should create part for valid name")
     @ParameterizedTest
     @MethodSource("provideStringsForValidName")
-    void shouldCreateValidPartWithValidName(String name){
+    public void shouldCreateValidPartWithValidName(String name){
         int initialSize = inventoryService.getAllParts().size();
         double price = 1.0;
         int value = 1;
@@ -93,7 +93,7 @@ class InventoryServiceTest {
     @DisplayName("should throw exception when creating part with empty name")
     @ParameterizedTest
     @EmptySource
-    void shouldThrowExceptionWithEmptyName(String name) {
+    public void shouldThrowExceptionWithEmptyName(String name) {
         double price = 1.0;
         int inStock = 1;
         int min = 0;
