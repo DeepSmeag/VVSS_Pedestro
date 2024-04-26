@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class RepoServiceIT {
+class RepoServiceITTest {
 
     private InventoryService inventoryService;
 
@@ -21,10 +21,10 @@ class RepoServiceIT {
 
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.initMocks(this);
         InventoryRepository repo = new InventoryRepository();
         inventoryService = new InventoryService(repo);
 
-        MockitoAnnotations.initMocks(this);
         Mockito.when(part.toString()).thenReturn("");
         repo.addPart(part);
     }
