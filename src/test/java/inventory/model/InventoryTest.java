@@ -49,13 +49,11 @@ public class InventoryTest {
         assertEquals(expectedProduct.getMax(), product.getMax());
     }
 
-    @ParameterizedTest
-    @DisplayName("should return empty product when not found")
-    @ValueSource(strings = {"abcdef"})
-    public void shouldReturnEmptyProductWhenNotFound(String searchItem) {
+    @Test
+    public void shouldReturnEmptyProductWhenNotFound() {
         Product expectedProduct = new Product(0, null, 0.0, 0, 0, 0, null);
 
-        Product product = inventory.lookupProduct(searchItem);
+        Product product = inventory.lookupProduct("abcdef");
 
         assertEquals(expectedProduct.getProductId(), product.getProductId());
         assertEquals(expectedProduct.getName(), product.getName());
@@ -66,7 +64,6 @@ public class InventoryTest {
     }
 
     @Test
-    @DisplayName("should return product with id 0")
     public void shouldNotFoundEmptyList(){
         Product expectedProduct = new Product(0, null, 0.0, 0, 0, 0, null);
         inventory = new Inventory();

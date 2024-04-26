@@ -55,7 +55,6 @@ public class InventoryServiceTest {
         assertEquals(max, inventoryService.getAllParts().get(initialSize).getMax());
     }
 
-    @DisplayName("should throw exception when creating part with negative stock")
     @Test
     public void shouldThrowExceptionWithNegativeStock() {
         String name = "Part";
@@ -68,7 +67,6 @@ public class InventoryServiceTest {
         assertThrows(Exception.class, () -> inventoryService.addOutsourcePart(name, price, inStock, min, max, companyName));
     }
 
-    @DisplayName("should create part for valid name")
     @Test
     public void shouldCreateValidPartWithValidName(){
         int initialSize = inventoryService.getAllParts().size();
@@ -88,7 +86,6 @@ public class InventoryServiceTest {
         assertEquals(max, inventoryService.getAllParts().get(initialSize).getMax());
     }
 
-    @DisplayName("should throw exception when creating part with empty name")
     @Test
     public void shouldThrowExceptionWithEmptyName() {
         double price = 1.0;
@@ -100,9 +97,4 @@ public class InventoryServiceTest {
         assertThrows(Exception.class, () -> inventoryService.addOutsourcePart("", price, inStock, min, max, companyName));
     }
 
-    private static Stream<Arguments> provideStringsForValidName() {
-        return Stream.of(
-                Arguments.of("a")
-        );
-    }
 }
