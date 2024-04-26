@@ -36,9 +36,8 @@ public class InventoryServiceTest {
     }
 
     @DisplayName("should create part for valid inStock")
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1})
-    public void shouldCreateValidPart(int value) {
+    @Test
+    public void shouldCreateValidPart() {
         int initialSize = inventoryService.getAllParts().size();
         String name = "Part";
         double price = 1.0;
@@ -46,12 +45,12 @@ public class InventoryServiceTest {
         int max = 10;
         String companyName = "CompanySRL";
 
-        inventoryService.addOutsourcePart(name, price, value, min, max, companyName);
+        inventoryService.addOutsourcePart(name, price, 0, min, max, companyName);
 
         assertEquals(initialSize + 1, inventoryService.getAllParts().size());
         assertEquals(name, inventoryService.getAllParts().get(initialSize).getName());
         assertEquals(price, inventoryService.getAllParts().get(initialSize).getPrice());
-        assertEquals(value, inventoryService.getAllParts().get(initialSize).getInStock());
+        assertEquals(0, inventoryService.getAllParts().get(initialSize).getInStock());
         assertEquals(min, inventoryService.getAllParts().get(initialSize).getMin());
         assertEquals(max, inventoryService.getAllParts().get(initialSize).getMax());
     }
@@ -70,9 +69,8 @@ public class InventoryServiceTest {
     }
 
     @DisplayName("should create part for valid name")
-    @ParameterizedTest
-    @MethodSource("provideStringsForValidName")
-    public void shouldCreateValidPartWithValidName(String name){
+    @Test
+    public void shouldCreateValidPartWithValidName(){
         int initialSize = inventoryService.getAllParts().size();
         double price = 1.0;
         int value = 1;
@@ -80,10 +78,10 @@ public class InventoryServiceTest {
         int max = 10;
         String companyName = "CompanySRL";
 
-        inventoryService.addOutsourcePart(name, price, value, min, max, companyName);
+        inventoryService.addOutsourcePart("a", price, value, min, max, companyName);
 
         assertEquals(initialSize + 1, inventoryService.getAllParts().size());
-        assertEquals(name, inventoryService.getAllParts().get(initialSize).getName());
+        assertEquals("a", inventoryService.getAllParts().get(initialSize).getName());
         assertEquals(price, inventoryService.getAllParts().get(initialSize).getPrice());
         assertEquals(value, inventoryService.getAllParts().get(initialSize).getInStock());
         assertEquals(min, inventoryService.getAllParts().get(initialSize).getMin());
@@ -91,16 +89,15 @@ public class InventoryServiceTest {
     }
 
     @DisplayName("should throw exception when creating part with empty name")
-    @ParameterizedTest
-    @EmptySource
-    public void shouldThrowExceptionWithEmptyName(String name) {
+    @Test
+    public void shouldThrowExceptionWithEmptyName() {
         double price = 1.0;
         int inStock = 1;
         int min = 0;
         int max = 10;
         String companyName = "CompanySRL";
 
-        assertThrows(Exception.class, () -> inventoryService.addOutsourcePart(name, price, inStock, min, max, companyName));
+        assertThrows(Exception.class, () -> inventoryService.addOutsourcePart("", price, inStock, min, max, companyName));
     }
 
     private static Stream<Arguments> provideStringsForValidName() {

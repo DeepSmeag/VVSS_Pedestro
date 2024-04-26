@@ -31,13 +31,11 @@ public class InventoryUnitTest {
         inventory.deletePart(inventory.getAllParts().get(inventory.getAllParts().size()-1));
     }
 
-    @ParameterizedTest
-    @DisplayName("should return product when found")
-    @ValueSource(strings = {"Part 1"})
-    public void shouldGetProductByName(String searchItem) {
+    @Test
+    public void shouldGetProductByName() {
         Mockito.when(part.getName()).thenReturn("Part 1");
 
-        Part result = inventory.lookupPart(searchItem);
+        Part result = inventory.lookupPart("Part 1");
 
         assertEquals(part, result);
     }
