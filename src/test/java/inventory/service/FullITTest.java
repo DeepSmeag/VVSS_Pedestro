@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class FullITTest {
+public class FullITTest {
 
     private InventoryService inventoryService;
 
@@ -17,26 +17,26 @@ class FullITTest {
 
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         InventoryRepository repo = new InventoryRepository();
         inventoryService = new InventoryService(repo);
         repo.addPart(part);
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         inventoryService.deletePart(inventoryService.getAllParts().get(inventoryService.getAllParts().size()-1));
     }
 
     @Test
-    void shouldFindPart() {
+    public void shouldFindPart() {
         Part result = inventoryService.lookupPart("Part 1");
 
         assertEquals(result, part);
     }
 
     @Test
-    void shouldNullWhenNotFound() {
+    public void shouldNullWhenNotFound() {
         Part result = inventoryService.lookupPart("abcdef");
 
         assertNull(result);
