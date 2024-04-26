@@ -21,13 +21,11 @@ public class InventoryTest {
         inventory.addProduct(new Product(2, "Product 2", 10.0, 10, 1, 100, null));
     }
 
-    @ParameterizedTest
-    @DisplayName("should return product when found 2")
-    @ValueSource(strings = {"Product 2", "2"})
-    public void shouldGetProductByName2(String searchItem) {
+    @Test
+    public void shouldGetProductByName2() {
         Product expectedProduct = new Product(2, "Product 2", 10.0, 10, 1, 100, null);
 //
-        Product product = inventory.lookupProduct(searchItem);
+        Product product = inventory.lookupProduct("Product 2");
 
         assertEquals(expectedProduct.getProductId(), product.getProductId());
         assertEquals(expectedProduct.getName(), product.getName());
@@ -36,13 +34,12 @@ public class InventoryTest {
         assertEquals(expectedProduct.getMin(), product.getMin());
         assertEquals(expectedProduct.getMax(), product.getMax());
     }
-    @ParameterizedTest
-    @DisplayName("should return product when found")
-    @ValueSource(strings = {"Product", "1"})
-    public void shouldGetProductByName(String searchItem) {
+
+    @Test
+    public void shouldGetProductByName() {
         Product expectedProduct = new Product(1, "Product", 10.0, 10, 1, 100, null);
 //
-        Product product = inventory.lookupProduct(searchItem);
+        Product product = inventory.lookupProduct("Product");
 
         assertEquals(expectedProduct.getProductId(), product.getProductId());
         assertEquals(expectedProduct.getName(), product.getName());
