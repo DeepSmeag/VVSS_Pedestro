@@ -1,5 +1,6 @@
 package inventory.service;
 
+import inventory.model.Part;
 import inventory.repository.InventoryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +30,9 @@ class InventoryServiceTest {
 
     @AfterEach
     void tearDown() {
-        inventoryService.deletePart(inventoryService.getAllParts().get(inventoryService.getAllParts().size()-1));
+        Part part = inventoryService.getAllParts().get(inventoryService.getAllParts().size()-1);
+        if(part.getName().equals("Part") || part.getName().equals("a"))
+            inventoryService.deletePart(part);
     }
 
     @DisplayName("should create part for valid inStock")

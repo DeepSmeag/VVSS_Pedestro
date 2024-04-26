@@ -1,5 +1,6 @@
 package inventory.model;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,10 @@ class InventoryUnitTest {
         MockitoAnnotations.initMocks(this);
         inventory = new Inventory();
         inventory.addPart(part);
+    }
+    @AfterEach
+    void tearDown() {
+        inventory.deletePart(inventory.getAllParts().get(inventory.getAllParts().size()-1));
     }
 
     @ParameterizedTest
