@@ -35,7 +35,7 @@ public class InventoryServiceTest {
             inventoryService.deletePart(part);
     }
 
-    @DisplayName("should create part for valid inStock")
+
     @Test
     public void shouldCreateValidPart() {
         int initialSize = inventoryService.getAllParts().size();

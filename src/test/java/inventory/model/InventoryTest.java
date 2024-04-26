@@ -83,7 +83,6 @@ public class InventoryTest {
 
     }
     @Test
-    @DisplayName("should throw error NullPointerException")
     public void shouldThrowNullPointerException(){
 
         assertThrows(NullPointerException.class, () -> {
